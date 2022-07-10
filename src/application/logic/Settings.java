@@ -67,8 +67,12 @@ public class Settings {
 		application.logic.Board.PlacePiece(row, col);
 	}
 	
-	public static void ColourSquare(int row, int col, Colour colour) {
-		board.ColourSquare(row, col, colour);
+	public static void ColourSquare(int row, int col, Colour colour, double opacity) {
+		board.ColourSquare(row, col, colour, opacity);
+	}
+	
+	public static void RefreshBoard() {
+		board.RefreshBoard();
 	}
 }
 

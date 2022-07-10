@@ -24,6 +24,8 @@ public class Board {
 		SetSquare(rows / 2 - 1, cols / 2, Colour.BLACK);
 		SetSquare(rows / 2, cols / 2 - 1, Colour.BLACK);
 		SetSquare(rows / 2, cols / 2, Colour.WHITE);
+		
+		ShowPossible();
 	}
 	
 	/**
@@ -61,6 +63,19 @@ public class Board {
 			if (CanPlace(row, col, player)) {
 				Place(row, col, player);
 				darkTurn = !darkTurn;
+				ShowPossible();
+			}
+		}
+	}
+	
+	private static void ShowPossible() {
+		Colour player = GetPlayer();
+		
+		for (int row = 0; row < Settings.GetRows(); row++) {
+			for (int col = 0; col < Settings.GetCols(); col++) {
+				if (CanPlace(row, col, player)) {
+					Settings.ColourSquare(row, col, player, 0.25);
+				}
 			}
 		}
 	}
@@ -117,6 +132,8 @@ public class Board {
 			}
 		}
 		
+		RefreshBoard();
+		
 		// If the success flag is true, place the piece.
 		if (flag == true)
 			SetSquare(row, col, colour);
@@ -125,12 +142,21 @@ public class Board {
 	}
 	
 	/**
+	 * Flips the piece in the given direction and all pieces
+	 * neighbouring a newly flipped piece in said direction if the
+	 * piece is not the colour of the current player.
 	 * 
-	 * @param row
-	 * @param col
-	 * @param colour
-	 * @param stepI
-	 * @param stepJ
+	 * @param row The row of the placed piece.
+	 * 
+	 * @param col The column of the placed piece.
+	 * 
+	 * @param colour The colour of the placed piece.
+	 * 
+	 * @param stepI The Y value for the Cartesian direction vector
+	 *              representing the direction to flip in.
+	 *              
+	 * @param stepJ The X value for the Cartesian direction vector
+	 *              representing the direction to flip in.
 	 */
 	private static void Flip(int row, int col, Colour colour, int stepI, int stepJ) {
 		int i = stepI;
@@ -150,6 +176,21 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Checks if at least one flip can be made in the given direction.
+	 * 
+	 * @param row The row of the placed piece.
+	 * 
+	 * @param col The column of the placed piece.
+	 * 
+	 * @param colour The colour of the placed piece.
+	 * 
+	 * @param stepI The Y value for the Cartesian direction vector
+	 *              representing the direction to check for flipability.
+	 *              
+	 * @param stepJ The X value for the Cartesian direction vector
+	 *              representing the direction to check for flipability.
+	 */
 	private static int CanPlace(int row, int col, Colour colour, int stepI, int stepJ) {
 		int i = stepI;
 		int j = stepJ;
@@ -174,6 +215,12 @@ public class Board {
 		return k;
 	}
 	
+	/**
+	 * Checks if the game is over. This will be true if no player can
+	 * make a valid move.
+	 * 
+	 * @return Whether or not the game is over.
+	 */
 	private static boolean CheckGameOver() {
 		if (!CanPlace(Colour.BLACK) && !CanPlace(Colour.WHITE))
 			return true;
@@ -181,8 +228,18 @@ public class Board {
 		return false;
 	}
 	
-	
-	
+	/**
+	 * Checks if the piece can be placed by checking for flipability
+	 * in each valid direction.
+	 * 
+	 * @param row The row of the piece to be placed.
+	 * 
+	 * @param col The column of the piece to be placed.
+	 * 
+	 * @param colour The colour of the piece to be placed.
+	 * 
+	 * @return Whether or not the piece can be placed.
+	 */
 	private static boolean CanPlace(int row, int col, Colour colour) {
 		if (SquareOutOfBounds(row, col) || GetColour(row, col) != null)
 			return false;
@@ -198,22 +255,58 @@ public class Board {
 		return false;
 	}
 	
-	
+	/**
+	 * Sets the colour of the square at the given coordinates.
+	 * 
+	 * @param row The row component of the squares coordinates.
+	 * 
+	 * @param col The column component of the squares coordinates.
+	 * 
+	 * @param colour The new colour of the square.
+	 */
 	private static void SetSquare(int row, int col, Colour colour) {
 		board[row][col].SetColour(colour);
-		Settings.ColourSquare(row, col, colour);
+		Settings.ColourSquare(row, col, colour, 1);
 	}
 	
+	/**
+	 * Gets the colour of the square at the given coordinates.
+	 * 
+	 * @param row The row component of the coordinates of the square.
+	 * 
+	 * @param col The column component of the squares coordinates.
+	 * 
+	 * @return The colour of the square at the given coordinates.
+	 */
 	private static Colour GetColour(int row, int col) {
 		return board[row][col].GetColour();
 	}
 	
 	
-	
+	/**
+	 * Checks if the square at the given coordinates is empty or not.
+	 * 
+	 * @param row The row component of the squares coordinates.
+	 * 
+	 * @param col The column component of the squares coordinates.
+	 * 
+	 * @return Whether or not the square is empty (has no colour).
+	 */
 	public static boolean EmptySquare(int row, int col) {
 		return !SquareOutOfBounds(row, col) && board[row][col].IsEmpty();
 	}
 	
+	/**
+	 * Checks if the given coordinates are out of bounds (don't
+	 * represent a valid square).
+	 * 
+	 * @param row The row component of the squares coordinates.
+	 * 
+	 * @param col The column component of the squares coordinates.
+	 * 
+	 * @return Whether or not the coordinates given represent a valid
+	 *         square.
+	 */
 	public static boolean SquareOutOfBounds(int row, int col) {
 		// The given row is less than zero, so out of bounds.
 		if (row < 0)
@@ -237,4 +330,8 @@ public class Board {
 		return false;
 	}
 	
+	
+	private static void RefreshBoard() {
+		Settings.RefreshBoard();
+	}
 }

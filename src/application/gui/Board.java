@@ -34,8 +34,14 @@ public class Board extends GridPane {
 		}
 	}
 	
-	public void ColourSquare(int row, int col, Colour colour) {
-		GetSquare(row, col).SetColour(colour);
+	public void ColourSquare(int row, int col, Colour colour, double opacity) {
+		GetSquare(row, col).SetColour(colour, opacity);
+	}
+	
+	public void RefreshBoard() {
+		for (Node node : this.getChildren()) {
+	        ((Square)node).Refresh();
+	    }
 	}
 	
 	private Square GetSquare(int row, int col) {

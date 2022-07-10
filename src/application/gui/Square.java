@@ -15,7 +15,7 @@ public class Square extends Button {
 		this.getStyleClass().add("reversiSquare");
 	}
 	
-	public void SetColour(Colour colour) {
+	public void SetColour(Colour colour, double opacity) {
 		Image img;
 		
 		if (colour == Colour.BLACK)
@@ -27,9 +27,13 @@ public class Square extends Button {
 		
 		view.fitHeightProperty().bind(this.heightProperty());
 		view.setPreserveRatio(true);
+		view.setOpacity(opacity);
 		
 		this.setGraphic(view);
 	}
 	
-	
+	public void Refresh() {
+		if (this.getGraphic() != null && this.getGraphic().getOpacity() != 1)
+			this.setGraphic(null);
+	}
 }
