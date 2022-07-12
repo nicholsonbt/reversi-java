@@ -265,6 +265,10 @@ public class Board {
 	 * @param colour The new colour of the square.
 	 */
 	private static void SetSquare(int row, int col, Colour colour) {
+		
+		if (EmptySquare(row, col))
+			Settings.AddTranscript(colour, row, col);
+		
 		board[row][col].SetColour(colour);
 		Settings.ColourSquare(row, col, colour, 1);
 	}

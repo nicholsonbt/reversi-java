@@ -3,3 +3,13 @@
 	-fx-background-radius: 0em;
 	-fx-border-color: #222222;	
 }
+
+.label {
+	-fx-font-size: 18;
+	-fx-text-fill: black;
+}
+
+.transcript {
+	-fx-font-size: 14;
+	-fx-text-fill: black;
+}

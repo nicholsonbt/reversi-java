@@ -1,5 +1,7 @@
 package application.logic;
 
+import application.gui.Game;
+
 public class Settings {
 	// Initialise default values:
 	private final static int DEFAULT_ROWS = 8;
@@ -12,7 +14,7 @@ public class Settings {
 	private static boolean darkFirst;
 	private static double squareLength;
 	
-	private static application.gui.Board board;
+	private static Game game;
 	
 	// Initialise values with default values:
 	public static void Initialise() {
@@ -22,8 +24,8 @@ public class Settings {
 		squareLength = DEFAULT_SQUARE_LENGTH;
 	}
 	
-	public static void Setup(application.gui.Board guiBoard) {
-		board = guiBoard;
+	public static void Setup(Game gameGUI) {
+		game = gameGUI;
 		Board.Setup();
 	}
 	
@@ -68,11 +70,15 @@ public class Settings {
 	}
 	
 	public static void ColourSquare(int row, int col, Colour colour, double opacity) {
-		board.ColourSquare(row, col, colour, opacity);
+		game.board.ColourSquare(row, col, colour, opacity);
 	}
 	
 	public static void RefreshBoard() {
-		board.RefreshBoard();
+		game.board.RefreshBoard();
+	}
+	
+	public static void AddTranscript(Colour colour, int row, int col) {
+		game.transcript.AddMove(colour, row, col);
 	}
 }
 

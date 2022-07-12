@@ -1,4 +1,4 @@
-package application.gui;
+package application.gui.game;
 
 import application.logic.Colour;
 import javafx.scene.control.Button;
