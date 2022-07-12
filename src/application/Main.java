@@ -1,6 +1,7 @@
 package application;
 	
 import application.gui.Game;
+import application.gui.StartScreen;
 import application.gui.game.Board;
 import application.logic.Settings;
 import javafx.application.Application;
@@ -13,10 +14,12 @@ public class Main extends Application {
 	public void start(Stage stage) {
 		Settings.Initialise();
 		
-		Game game = new Game();
+		StartScreen start = new StartScreen();
+		
+		//Game game = new Game();
 		
 		// Set the stage with a new scene, containing a new instance of GUI (extends Pane).
-		stage.setScene(new Scene(game));
+		stage.setScene(new Scene(start));
 		
 		stage.setWidth(500);
 		stage.setHeight(500);
@@ -29,7 +32,7 @@ public class Main extends Application {
         
         stage.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         
-        Settings.Setup(game);
+        //Settings.Setup(game);
 	}
 	
 	public static void main(String[] args) {
