@@ -13,3 +13,9 @@
 	-fx-font-size: 14;
 	-fx-text-fill: black;
 }
+
+.customBorder {
+	-fx-background-color: transparent;
+	-fx-background-radius: 0em;
+	-fx-border-color: #222222;
+}
