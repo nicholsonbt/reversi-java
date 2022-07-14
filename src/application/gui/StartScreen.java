@@ -2,43 +2,32 @@ package application.gui;
 
 import application.logic.Settings;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
-import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.util.Callback;
 
 public class StartScreen extends Pane {
 	private VBox container;
-	private HBox options, boardSize, startColour;
+	private HBox subContainer0, subContainer1, subContainer2, subContainer3, boardSizeInput;
+	private FlowPane boardSizeContainer, startColourContainer;
 	private Button twoPlayers, onePlayer, toggleBackground;
 	private Label boardSizeLabel, mult, startColourLabel;
 	private IntegerField rows, cols;
-	private CustomComboBox<String> choice;
-	private StringBinding textBinding;
-	private EventHandler<ActionEvent> toggleEvent;
-	private EventHandler<MouseEvent> mouseEnterEvent, mouseExitEvent;
+	private ComboBox<String> choice;
 	
 	public StartScreen() {
 		InitialiseWidgets();
-		SetupCustomBindings();
 		SetupCustomEvents();
 		SetupWidgets();
-		SetupStyles();
 		BindWidgets();
 		AddWidgets();
 	}
@@ -48,9 +37,15 @@ public class StartScreen extends Pane {
 		container = new VBox();
 		
 		// HBoxes
-		options = new HBox();
-		boardSize = new HBox();
-		startColour = new HBox();
+		subContainer0 = new HBox();
+		subContainer1 = new HBox();
+		subContainer2 = new HBox();
+		subContainer3 = new HBox();
+		boardSizeInput = new HBox();
+		
+		// FlowPanes
+		boardSizeContainer = new FlowPane();
+		startColourContainer = new FlowPane();
 		
 		// Buttons
 		twoPlayers = new Button("Player Vs. Player");
@@ -59,7 +54,7 @@ public class StartScreen extends Pane {
 		
 		// Labels
 		boardSizeLabel = new Label("Board Size:");
-		mult = new Label("X");
+		mult = new Label("x");
 		startColourLabel = new Label("Start Colour:");
 		
 		// IntegerFields
@@ -67,94 +62,114 @@ public class StartScreen extends Pane {
 		cols = new IntegerField(8);
 		
 		// ComboBoxes
-		choice = new CustomComboBox<String>();
+		choice = new ComboBox<String>();
 	}
 	
-	private void SetupCustomBindings() {
-		textBinding = Bindings.createStringBinding(() -> {
-			if (Settings.lightModeProperty.get())
-				return "Dark Mode";
-			
-			return "Light Mode";
-		}, Settings.lightModeProperty);
-	}
 	
 	private void SetupCustomEvents() {
-		toggleEvent = new EventHandler<ActionEvent>() {
+		toggleBackground.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
                 Settings.ToggleLightDark();
             }
-        };
-        
+        });
 	}
 	
 	private void SetupWidgets() {
-		toggleBackground.textProperty().bind(textBinding);
-		toggleBackground.setOnAction(toggleEvent);
+		// Still need to bind font.
+		twoPlayers.setFont(new Font(24));
+		onePlayer.setFont(new Font(24));
 		
-		rows.setPrefSize(30, 20);
-		cols.setPrefSize(30, 20);
+
+		subContainer0.setAlignment(Pos.TOP_RIGHT);
+		subContainer1.setAlignment(Pos.CENTER);
+		subContainer2.setAlignment(Pos.CENTER);
+		subContainer3.setAlignment(Pos.CENTER);
+		
+		rows.setPrefWidth(30);
+		cols.setPrefWidth(30);
+		
+		boardSizeContainer.setAlignment(Pos.CENTER);
+		startColourContainer.setAlignment(Pos.CENTER);
 		
 		choice.getItems().addAll("Black", "White");
 		choice.getSelectionModel().selectFirst();
 	}
 	
-	private void SetupStyles() {
-		twoPlayers.getStyleClass().add("customBorder");
-		onePlayer.getStyleClass().add("customBorder");
-		rows.getStyleClass().add("customBorder");
-		cols.getStyleClass().add("customBorder");
-		choice.getStyleClass().add("customBorder");
-		toggleBackground.getStyleClass().add("customBorder");
-	}
-	
 	
 	private void BindWidgets() {
-		this.backgroundProperty().bind(Settings.backgroundColourBinding);
+		toggleBackground.textProperty().bind(Bindings.createStringBinding(() -> {
+			if (Settings.lightModeProperty.get())
+				return "Dark Mode";
+			
+			return "Light Mode";
+		}, Settings.lightModeProperty));
 		
-		choice.backgroundProperty.bind(Settings.backgroundColourBinding);
-		choice.backgroundHighlightProperty.bind(Settings.highlightBackgroundColourBinding);
-		choice.textFillProperty.bind(Settings.textColourBinding);
-		choice.textFillHighlightProperty.bind(Settings.highlightTextColourBinding);
-		choice.fontProperty.bind(Settings.GetFontBinding(14));
 		
-		rows.backgroundProperty.bind(Settings.backgroundColourBinding);
-		rows.backgroundHighlightProperty.bind(Settings.highlightColourBinding);
-		rows.textFillProperty.bind(Settings.textColourBinding);
-		rows.textFillHighlightProperty.bind(Settings.highlightTextColourBinding);
-		rows.fontProperty().bind(Settings.GetFontBinding(14));
+		toggleBackground.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.widthProperty().get() * (1 / 8.0);
+		}, container.widthProperty()));
 		
-		cols.backgroundProperty.bind(Settings.backgroundColourBinding);
-		cols.backgroundHighlightProperty.bind(Settings.highlightColourBinding);
-		cols.textFillProperty.bind(Settings.textColourBinding);
-		cols.textFillHighlightProperty.bind(Settings.highlightTextColourBinding);
-		cols.fontProperty().bind(Settings.GetFontBinding(14));
-
-		twoPlayers.textFillProperty().bind(Settings.textColourBinding);
-		twoPlayers.fontProperty().bind(Settings.GetFontBinding(20));
+		toggleBackground.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.heightProperty().get() * (1 / 12.0);
+		}, container.heightProperty()));
 		
-		onePlayer.textFillProperty().bind(Settings.textColourBinding);
-		onePlayer.fontProperty().bind(Settings.GetFontBinding(20));
 		
-		toggleBackground.textFillProperty().bind(Settings.textColourBinding);
-		toggleBackground.fontProperty().bind(Settings.GetFontBinding(14));
 		
-		boardSizeLabel.textFillProperty().bind(Settings.textColourBinding);
-		boardSizeLabel.fontProperty().bind(Settings.GetFontBinding(14));
+		twoPlayers.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.widthProperty().get() * (1 / 2.0);
+		}, container.widthProperty()));
 		
-		mult.textFillProperty().bind(Settings.textColourBinding);
-		mult.fontProperty().bind(Settings.GetFontBinding(14));
+		twoPlayers.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.heightProperty().get() * (1 / 6.0);
+		}, container.heightProperty()));
 		
-		startColourLabel.textFillProperty().bind(Settings.textColourBinding);
-		startColourLabel.fontProperty().bind(Settings.GetFontBinding(14));
+		
+		
+		onePlayer.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.widthProperty().get() * (1 / 2.0);
+		}, container.widthProperty()));
+		
+		onePlayer.prefHeightProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.heightProperty().get() * (1 / 6.0);
+		}, container.heightProperty()));
+		
+		
+		
+		subContainer1.paddingProperty().bind(Bindings.createObjectBinding(() -> {
+			double h = container.heightProperty().get();
+			return new Insets(h * (5 / 36.0), 0, h * (1 / 24.0), 0);
+		}, container.heightProperty()));
+		
+		subContainer2.paddingProperty().bind(Bindings.createObjectBinding(() -> {
+			double h = container.heightProperty().get();
+			return new Insets(h * (1 / 24.0), 0, h * (5 / 36.0), 0);
+		}, container.heightProperty()));
+		
+		
+		container.prefWidthProperty().bind(this.widthProperty());
+		container.prefHeightProperty().bind(this.heightProperty());
+		
+		subContainer0.prefWidthProperty().bind(container.widthProperty());
+		subContainer1.prefWidthProperty().bind(container.widthProperty());
+		subContainer2.prefWidthProperty().bind(container.widthProperty());
+		subContainer3.prefWidthProperty().bind(container.widthProperty());
 	}
 	
 	private void AddWidgets() {
-		boardSize.getChildren().addAll(boardSizeLabel, rows, mult, cols);
-		startColour.getChildren().addAll(startColourLabel, choice);
-		options.getChildren().addAll(boardSize, startColour, toggleBackground);
-		container.getChildren().addAll(twoPlayers, onePlayer, options);
+		// This should prevent the input widgets from being separated.
+		boardSizeInput.getChildren().addAll(rows, mult, cols);
+		
+		boardSizeContainer.getChildren().addAll(boardSizeLabel, boardSizeInput);
+		startColourContainer.getChildren().addAll(startColourLabel, choice);
+		
+		
+		subContainer0.getChildren().add(toggleBackground);
+		subContainer1.getChildren().add(twoPlayers);
+		subContainer2.getChildren().add(onePlayer);
+		subContainer3.getChildren().addAll(boardSizeContainer, startColourContainer);
+		
+		container.getChildren().addAll(subContainer0, subContainer1, subContainer2, subContainer3);
 		this.getChildren().add(container);
 	}
 }

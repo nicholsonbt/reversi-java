@@ -14,8 +14,63 @@
 	-fx-text-fill: black;
 }
 
-.customBorder {
-	-fx-background-color: transparent;
-	-fx-background-radius: 0em;
-	-fx-border-color: #222222;
+.integer-field {
+	-fx-alignment: center;
+}
+
+
+.light * {
+	-fx-background-color: #e6e9eb;
+    -fx-highlight-fill: #59acff;
+    -fx-text-fill: #000000;
+    -fx-highlight-text-fill: #ffffff;
+    -fx-prompt-text-fill: #222222;
+}
+
+.light * .combo-box-popup .list-cell:hover {
+	-fx-background-color: #59acff;
+    -fx-text-fill: #ffffff;
+}
+
+.light * .arrow {
+	-fx-background-color: black;
+}
+
+
+.light * .combo-box, .light * .button {
+	-fx-border-color: black;
+}
+
+
+.light * .text-field * {
+	-fx-background-color: #f1f3f4;
+}
+
+
+
+.dark * {
+	-fx-background-color: #08152b;
+    -fx-highlight-fill: #59acff;
+    -fx-text-fill: #ffffff;
+    -fx-highlight-text-fill: #000000;
+    -fx-prompt-text-fill: #dddddd;
+}
+
+.dark * .combo-box-popup .list-cell:hover {
+	-fx-background-color: #59acff;
+    -fx-text-fill: #000000;
+}
+
+.dark * .arrow {
+	-fx-background-color: white;
+}
+
+
+.dark * .combo-box, .dark * .button {
+	-fx-border-color: white;
+}
+
+
+.dark * .text-field * {
+	-fx-background-color: #35394a;
 }
