@@ -9,22 +9,27 @@
 	-fx-text-fill: black;
 }
 
+.root-container {
+	-fx-background-color: linear-gradient(to bottom right, #500000, #002020);
+}
+
+
 .transcript {
 	-fx-font-size: 14;
 	-fx-text-fill: black;
 }
 
-.integer-field {
+.integer-field, .button {
 	-fx-alignment: center;
 }
 
 
 .light * {
-	-fx-background-color: #e6e9eb;
+	-fx-background-color: #e0e0e0;
     -fx-highlight-fill: #59acff;
     -fx-text-fill: #000000;
     -fx-highlight-text-fill: #ffffff;
-    -fx-prompt-text-fill: #222222;
+    -fx-prompt-text-fill: #444444;
 }
 
 .light * .combo-box-popup .list-cell:hover {
@@ -33,27 +38,35 @@
 }
 
 .light * .arrow {
-	-fx-background-color: black;
+	-fx-background-color: #000000;
 }
-
 
 .light * .combo-box, .light * .button {
-	-fx-border-color: black;
+	-fx-border-color: #000000;
 }
 
+.light * .button:hover {
+	-fx-background-color: #d0d0d0;
+}
+
+.light * .button:pressed {
+	-fx-background-color: #b0b0b0;
+}
 
 .light * .text-field * {
-	-fx-background-color: #f1f3f4;
+	-fx-background-color: #fafafa;
 }
+
+
 
 
 
 .dark * {
-	-fx-background-color: #08152b;
+	-fx-background-color: #1f1f1f;
     -fx-highlight-fill: #59acff;
     -fx-text-fill: #ffffff;
     -fx-highlight-text-fill: #000000;
-    -fx-prompt-text-fill: #dddddd;
+    -fx-prompt-text-fill: #bbbbbb;
 }
 
 .dark * .combo-box-popup .list-cell:hover {
@@ -62,15 +75,23 @@
 }
 
 .dark * .arrow {
-	-fx-background-color: white;
+	-fx-background-color: #ffffff;
 }
-
 
 .dark * .combo-box, .dark * .button {
-	-fx-border-color: white;
+	-fx-border-color: #ffffff;
 }
 
+.dark * .button:hover {
+	-fx-background-color: #2f2f2f;
+}
+
+.dark * .button:pressed {
+	-fx-background-color: #4f4f4f;
+}
 
 .dark * .text-field * {
-	-fx-background-color: #35394a;
+	-fx-background-color: #060606;
 }
+
+

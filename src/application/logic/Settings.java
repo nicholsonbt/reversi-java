@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 public class Settings {
 	// Initialise default values:
 	public final static double DEFAULT_WIDTH = 1080;
-	public final static double DEFAULT_HEIGHT = 720;
+	public final static double DEFAULT_WIDTH_HEIGHT_RATIO = 1.5;
 	
 	private final static int DEFAULT_ROWS = 8;
 	private final static int DEFAULT_COLS = 8;
@@ -34,7 +34,6 @@ public class Settings {
 		cols = DEFAULT_COLS;
 		darkFirst = DEFAULT_DARK_FIRST;
 		squareLength = DEFAULT_SQUARE_LENGTH;
-		
 		SetupLightMode();
 	}
 	

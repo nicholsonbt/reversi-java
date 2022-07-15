@@ -22,7 +22,7 @@ public class StartScreen extends Pane {
 	private Button twoPlayers, onePlayer, toggleBackground;
 	private Label boardSizeLabel, mult, startColourLabel;
 	private IntegerField rows, cols;
-	private ComboBox<String> choice;
+	private TextComboBox choice;
 	
 	public StartScreen() {
 		InitialiseWidgets();
@@ -62,7 +62,7 @@ public class StartScreen extends Pane {
 		cols = new IntegerField(8);
 		
 		// ComboBoxes
-		choice = new ComboBox<String>();
+		choice = new TextComboBox();
 	}
 	
 	
@@ -77,18 +77,52 @@ public class StartScreen extends Pane {
 	
 	private void SetupWidgets() {
 		// Still need to bind font.
-		twoPlayers.setFont(new Font(24));
-		onePlayer.setFont(new Font(24));
+		twoPlayers.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 30.0));
+		}, container.widthProperty()));
 		
+		onePlayer.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 30.0));
+		}, container.widthProperty()));
+		
+		toggleBackground.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 60.0));
+		}, container.widthProperty()));
+		
+		boardSizeLabel.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 80.0));
+		}, container.widthProperty()));
+		
+		rows.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 80.0));
+		}, container.widthProperty()));
+		
+		mult.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 80.0));
+		}, container.widthProperty()));
+		
+		cols.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 80.0));
+		}, container.widthProperty()));
+		
+		startColourLabel.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 80.0));
+		}, container.widthProperty()));
+		
+		choice.fontProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Font(container.widthProperty().get() * (1 / 80.0));
+		}, container.widthProperty()));
 
+		startColourLabel.paddingProperty().bind(Bindings.createObjectBinding(() -> {
+			return new Insets(0, container.widthProperty().get() * (1 / 108.0), 0, 0);
+		}, container.widthProperty()));
+		
+		
+		
 		subContainer0.setAlignment(Pos.TOP_RIGHT);
 		subContainer1.setAlignment(Pos.CENTER);
 		subContainer2.setAlignment(Pos.CENTER);
 		subContainer3.setAlignment(Pos.CENTER);
-		
-		rows.setPrefWidth(30);
-		cols.setPrefWidth(30);
-		
 		boardSizeContainer.setAlignment(Pos.CENTER);
 		startColourContainer.setAlignment(Pos.CENTER);
 		
@@ -134,6 +168,20 @@ public class StartScreen extends Pane {
 			return container.heightProperty().get() * (1 / 6.0);
 		}, container.heightProperty()));
 		
+		
+		choice.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.widthProperty().get() * (1 / 12.0);
+		}, container.widthProperty()));
+		
+		rows.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.widthProperty().get() * (1 / 20.0);
+		}, container.widthProperty()));
+		
+		
+		cols.prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+			return container.widthProperty().get() * (1 / 20.0);
+		}, container.widthProperty()));
+
 		
 		
 		subContainer1.paddingProperty().bind(Bindings.createObjectBinding(() -> {
