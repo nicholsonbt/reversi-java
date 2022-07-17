@@ -1,5 +1,5 @@
 package application.logic;
 
-public enum Colour {
+public enum SquareColour {
 	BLACK, WHITE
 }

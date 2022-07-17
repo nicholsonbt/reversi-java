@@ -1,14 +1,3 @@
-.reversiSquare {
-	-fx-background-color: #229922;
-	-fx-background-radius: 0em;
-	-fx-border-color: #222222;	
-}
-
-.label {
-	-fx-font-size: 18;
-	-fx-text-fill: black;
-}
-
 .root-container {
 	-fx-background-color: linear-gradient(to bottom right, #500000, #002020);
 }
@@ -92,6 +81,12 @@
 
 .dark * .text-field * {
 	-fx-background-color: #060606;
+}
+
+.reversiSquare {
+	-fx-background-color: #229922;
+	-fx-background-radius: 0em;
+	-fx-border-color: #222222;	
 }
 
 

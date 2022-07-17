@@ -1,5 +1,6 @@
 package application.gui;
 
+import application.Main;
 import application.logic.Settings;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -68,11 +69,28 @@ public class StartScreen extends Pane {
 	
 	private void SetupCustomEvents() {
 		toggleBackground.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
+            public void handle(ActionEvent e) {
                 Settings.ToggleLightDark();
             }
         });
+		
+		twoPlayers.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				Settings.setTwoPlayer();
+				playGame();
+			}
+		});
+		
+		onePlayer.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent e) {
+				Settings.setOnePlayer();
+				playGame();
+			}
+		});
+	}
+	
+	private static void playGame() {
+		Main.PlayGame();
 	}
 	
 	private void SetupWidgets() {

@@ -1,25 +1,27 @@
 package application.gui.game;
 
-import application.logic.Colour;
+import application.logic.SquareColour;
 import application.logic.Settings;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.DoubleBinding;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 public class Board extends GridPane {
 	public Board() {
 		Square square;
+		DoubleBinding lengthBinding = Bindings.createDoubleBinding(() -> {
+			double w = prefWidthProperty().get() / Settings.GetCols();
+			double h = prefHeightProperty().get() / Settings.GetRows();
+			return Math.min(w, h);
+		}, prefWidthProperty(), prefHeightProperty());
 		
 		for (int row = 0; row < Settings.GetRows(); row++) {
 			for (int col = 0; col < Settings.GetCols(); col++) {
 				square = new Square(row, col);
 				
-				square.setMinHeight(Settings.GetSquareLength());
-				square.setPrefHeight(Settings.GetSquareLength());
-				square.setMaxHeight(Settings.GetSquareLength());
-				
-				square.minWidthProperty().bind(square.heightProperty());
-				square.prefWidthProperty().bind(square.heightProperty());
-				square.maxWidthProperty().bind(square.heightProperty());
+				square.absoluteWidthProperty().bind(lengthBinding);
+				square.absoluteHeightProperty().bind(lengthBinding);
 				
 				square.setOnAction(e -> {
 					// Get clicked square.
@@ -34,7 +36,7 @@ public class Board extends GridPane {
 		}
 	}
 	
-	public void ColourSquare(int row, int col, Colour colour, double opacity) {
+	public void ColourSquare(int row, int col, SquareColour colour, double opacity) {
 		GetSquare(row, col).SetColour(colour, opacity);
 	}
 	

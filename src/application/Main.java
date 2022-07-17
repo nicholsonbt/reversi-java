@@ -107,7 +107,7 @@ public class Main extends Application {
 		game.prefHeightProperty().bind(root.heightProperty());
 		
 		root.getChildren().add(game);
-		//Settings.SetupGame(game);
+		Settings.SetupGame((Game)game);
 	}
 	
 	/**

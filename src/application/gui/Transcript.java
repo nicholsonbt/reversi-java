@@ -1,6 +1,6 @@
 package application.gui;
 
-import application.logic.Colour;
+import application.logic.SquareColour;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.value.ChangeListener;
@@ -72,10 +72,10 @@ public class Transcript extends Pane {
 		content.getChildren().add(new Text(line));
 	}
 	
-	public void AddMove(Colour player, int row, int col) {
+	public void AddMove(SquareColour player, int row, int col) {
 		String line = "";
 		
-		if (player == Colour.BLACK)
+		if (player == SquareColour.BLACK)
 			line += "B: (";
 		else
 			line += "W: (";
