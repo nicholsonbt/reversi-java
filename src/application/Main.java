@@ -1,5 +1,5 @@
 package application;
-	
+
 import application.gui.Game;
 import application.gui.StartScreen;
 import application.logic.Settings;
@@ -13,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
 
 public class Main extends Application {
 	private static Pane root, start, game;
@@ -122,7 +121,6 @@ public class Main extends Application {
 		
 		root.getChildren().add(start);
 	}
-	
 	
 	public static void main(String[] args) {
 		launch(args);

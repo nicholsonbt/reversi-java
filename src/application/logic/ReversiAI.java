@@ -3,14 +3,8 @@ package application.logic;
 import java.util.List;
 
 public class ReversiAI {
-	private static final int TOP_N = 1;
-	
 	public static Vector calculateOptimalMove(BoardLogic board, SquareColour colour) {
 		List<Vector> possibleMoves = Move.possibleMoves(board, colour);
-		
-		for (Vector pos : possibleMoves) {
-			System.out.println(pos.x + ", " + pos.y);
-		}
 		
 		return calculateOptimalMove(board.copy(), colour, colour, possibleMoves, 3).item0;
 	}

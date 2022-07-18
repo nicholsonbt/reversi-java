@@ -21,8 +21,6 @@ public class IntegerField extends TextField {
 				});
 			}
 		});
-		
-		System.out.println(this.getChildren());
 	}
 	
 	public IntegerField(int defaultValue) {

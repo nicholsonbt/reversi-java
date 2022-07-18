@@ -32,7 +32,6 @@ public class Square extends Button {
 			return !Settings.checkTwoPlayer() && !Settings.boardEnabledProperty.get();
 		}, Settings.boardEnabledProperty));
 		
-		
 		this.getStyleClass().add("reversiSquare");
 	}
 	

@@ -52,7 +52,6 @@ public class Move {
 			}
 		}
 		
-		
 		return positions;
 	}
 	

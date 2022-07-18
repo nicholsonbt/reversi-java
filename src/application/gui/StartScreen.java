@@ -8,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -65,7 +64,6 @@ public class StartScreen extends Pane {
 		// ComboBoxes
 		choice = new TextComboBox();
 	}
-	
 	
 	private void SetupCustomEvents() {
 		toggleBackground.setOnAction(new EventHandler<ActionEvent>() {

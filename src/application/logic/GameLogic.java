@@ -68,23 +68,6 @@ public class GameLogic {
 		}
 	}
 	
-	
-//	private static void place(SquareColour player, Vector pos) {
-//		Vector dir;
-//		
-//		board.setSquare(player, pos);
-//		
-//		for (int dirRow = -1; dirRow <= 1; dirRow++) {
-//			for (int dirCol = -1; dirCol <= 1; dirCol++) {
-//				dir = new Vector(dirRow, dirCol);
-//				
-//				if (Move.canPlace(board.copy(), player, pos, dir)) {
-//					board.flip(player, pos, dir);
-//				}
-//			}
-//		}
-//	}
-	
 	private static void showPossible() {
 		SquareColour player = getPlayer();
 		
